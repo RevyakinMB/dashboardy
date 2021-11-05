@@ -1,6 +1,6 @@
 import { ReportHandler } from 'web-vitals';
 
-const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+const reportWebVitals: (h?: ReportHandler) => void = (onPerfEntry?: ReportHandler) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     import('web-vitals').then((webVitals) => {
       webVitals.getCLS(onPerfEntry);
