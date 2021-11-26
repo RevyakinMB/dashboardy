@@ -2,7 +2,12 @@ import React from 'react';
 
 const Comp1: React.FC = () => (
   <div>
-    TODO1
+    <div>TODO1</div>
+    <div>TODO1</div>
+    <div>TODO1</div>
+    <div>TODO1</div>
+    <div>TODO1</div>
+    <div>TODO1</div>
   </div>
 );
 

@@ -1,0 +1,38 @@
+@use '../../variables';
+
+$header-height: 45px;
+
+.appHeader {
+    height: $header-height;
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.appHeaderContent {
+    padding: 5px;
+    flex: 1 0 100vw;
+    background-color: variables.$celadon;
+}
+
+.appMenu {
+    transition: height .2s;
+    overflow: hidden;
+    background-color: variables.$celadon;
+    width: 300px;
+    height: 0;
+    flex-grow: 0;
+
+    &.open {
+        height: calc(100vh - $header-height - 1px);
+        // TODO: (re)set --vh in JS
+        height: calc(var(--vh, 1vh) * 100 - $header-height - 1px);
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding-left: 10px;
+    }
+}

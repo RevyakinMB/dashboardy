@@ -9,38 +9,41 @@ import {
 
 import routes from './routes';
 import NavBar from './NavBar';
+import styles from './RouterView.module.scss';
 
 const RouterView: React.FC = () => (
   <>
     <BrowserRouter>
       <NavBar />
-      <Routes>
-        {
-          routes.map((route) => {
-            if (route.redirect) {
-              return (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={<Navigate replace to={route.redirect} />}
-                />
-              );
-            }
+      <div className={styles.routerViewContainer}>
+        <Routes>
+          {
+            routes.map((route) => {
+              if (route.redirect) {
+                return (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={<Navigate replace to={route.redirect} />}
+                  />
+                );
+              }
 
-            const { component: Component } = route;
-            if (Component) {
-              return (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={<Component />}
-                />
-              );
-            }
-            return <></>;
-          })
-        }
-      </Routes>
+              const { component: Component } = route;
+              if (Component) {
+                return (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={<Component />}
+                  />
+                );
+              }
+              return <></>;
+            })
+          }
+        </Routes>
+      </div>
     </BrowserRouter>
   </>
 );
