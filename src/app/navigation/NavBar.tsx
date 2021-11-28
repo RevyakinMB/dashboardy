@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
             />
           </Button>
           <span className={styles.headerBranding}>
-            Some branding text
+            {'{companyName}'}
           </span>
         </div>
         <div className={menuClassnames}>
