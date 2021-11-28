@@ -38,8 +38,6 @@ $header-height: 3.5em;
 
     &.open {
         height: calc(100vh - $header-height - 1px);
-        // TODO: (re)set --vh in JS
-        height: calc(var(--vh, 1vh) * 100 - $header-height - 1px);
     }
 
     ul {
