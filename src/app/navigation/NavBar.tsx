@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Icon, Button } from 'semantic-ui-react';
 import classnames from 'classnames';
 import styles from './NavBar.module.scss';
@@ -7,9 +7,16 @@ import styles from './NavBar.module.scss';
 const NavBar: React.FC = () => {
   const [toggled, setToggled] = useState(false);
   const toggleMenu = () => setToggled(!toggled);
-  const menuClassNames = classnames(styles.appMenu, {
+
+  const menuClassnames = classnames(styles.appMenu, {
     [styles.open]: toggled,
   });
+
+  const location = useLocation();
+  const getLinkClassname = (path: string) => classnames({
+    [styles.current]: location.pathname === path,
+  });
+
   return (
     <div>
       <div className={styles.appHeader}>
@@ -23,19 +30,28 @@ const NavBar: React.FC = () => {
               name="bars"
             />
           </Button>
+          <span className={styles.headerBranding}>
+            Some branding text
+          </span>
         </div>
-        <div className={menuClassNames}>
+        <div className={menuClassnames}>
           <ul>
-            <li>
+            <li className={getLinkClassname('/path1')}>
               <Link to="/path1">
-                Component 1
+                Route 1
               </Link>
             </li>
-            <li>
+            <li className={getLinkClassname('/path2')}>
               <Link to="/path2">
-                Component 2
+                Route 2
               </Link>
             </li>
+            <li><Link to="/path2">Dummy Route 1</Link></li>
+            <li><Link to="/path2">Dummy Route 2</Link></li>
+            <li><Link to="/path2">Dummy Route 3</Link></li>
+            <li><Link to="/path2">Dummy Route 4</Link></li>
+            <li><Link to="/path2">Dummy Route 5</Link></li>
+            <li><Link to="/path2">Dummy Route 6</Link></li>
           </ul>
         </div>
       </div>

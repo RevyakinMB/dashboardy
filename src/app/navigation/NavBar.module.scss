@@ -1,6 +1,7 @@
 @use '../../variables';
+@use 'sass:color';
 
-$header-height: 45px;
+$header-height: 3.5em;
 
 .appHeader {
     height: $header-height;
@@ -11,9 +12,16 @@ $header-height: 45px;
 }
 
 .appHeaderContent {
-    padding: 5px;
+    padding: 0.5em;
     flex: 1 0 100vw;
     background-color: variables.$celadon;
+}
+
+.headerBranding {
+    font-size: 2em;
+    color: variables.$cerulean-blue;
+    vertical-align: middle;
+    padding: 0.25em;
 }
 
 .appMenu {
@@ -33,6 +41,29 @@ $header-height: 45px;
     ul {
         list-style-type: none;
         margin: 0;
-        padding-left: 10px;
+        padding: 0;
+
+        $darker-link-color: color.scale(variables.$cerulean-blue, $lightness: -40%);
+
+        li {
+            padding: 0.5em;
+            padding-left: 1em;
+
+            &.current a {
+                font-size: 3em;
+                color: $darker-link-color;
+                cursor: default;
+            }
+        }
+
+        a {
+            font-size: 2em;
+            color: variables.$cerulean-blue;
+            transition: color .2s;
+
+            &:hover {
+                color: $darker-link-color;
+            }
+        }
     }
 }
