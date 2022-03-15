@@ -1,4 +1,4 @@
-import Comp1 from '../comp1';
+import DistributionCenters from '../distibution-centers';
 import Comp2 from '../comp2';
 
 export default [{
@@ -6,7 +6,7 @@ export default [{
   redirect: '/path1',
 }, {
   path: '/path1',
-  component: Comp1,
+  component: DistributionCenters,
 }, {
   path: '/path2',
   component: Comp2,

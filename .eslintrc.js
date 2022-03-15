@@ -23,6 +23,8 @@ module.exports = {
   ],
   rules: {
     'no-use-before-define': 'off',
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-filename-extension': [
       'warn',
