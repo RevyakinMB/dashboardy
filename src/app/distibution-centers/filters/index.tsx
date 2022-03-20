@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Button, Dropdown } from 'semantic-ui-react';
 
 import QuickSearch from './QuickSearch';
 import styles from './index.module.scss';
@@ -43,8 +43,43 @@ const DistributionCenterFilters: React.FC<Props> = ({
     [onFiltersChange],
   );
 
+  const onInputChange = useCallback(
+    (value) => onFiltersChange({
+      type: 'search',
+      payload: value,
+    }),
+    [onFiltersChange],
+  );
+
+  const [isShown, setIsShown] = useState(true);
+  const onShowHideClick = useCallback(
+    () => setIsShown(!isShown),
+    [setIsShown, isShown],
+  );
+
+  const duplicateInput = useCallback(
+    (value) => {
+      const newValue = value
+        ? value.split('').map((v: string) => `${v}${v}`).join('')
+        : value;
+      onFiltersChange({
+        type: 'search',
+        payload: newValue,
+      });
+    },
+    [onFiltersChange],
+  );
+  const [doDuplication, setDoDuplication] = useState(false);
+  const onSearchHanderUpdateClick = useCallback(
+    () => setDoDuplication(!doDuplication),
+    [setDoDuplication, doDuplication],
+  );
+
   return (
     <div className={styles.filters}>
+      Search text:
+      { filters.search }
+
       <Dropdown
         className={styles.dropdownFilter}
         multiple
@@ -67,11 +102,26 @@ const DistributionCenterFilters: React.FC<Props> = ({
 
       <div className={styles.spacer} />
 
-      <QuickSearch
-        onChange={onChange}
-        placeholder="Type to filter..."
-        value={filters.search || ''}
-      />
+      { isShown && (
+        <QuickSearch
+          name="search"
+          onInputChange={doDuplication ? duplicateInput : onInputChange}
+          placeholder="Type to filter..."
+          value={filters.search || ''}
+        />
+      )}
+
+      <Button
+        onClick={onShowHideClick}
+      >
+        { isShown ? 'Hide' : 'Show' }
+      </Button>
+
+      <Button
+        onClick={onSearchHanderUpdateClick}
+      >
+        { doDuplication ? 'Don\'t do duplication.' : 'Do duplicate!' }
+      </Button>
     </div>
   );
 };
