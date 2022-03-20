@@ -23,17 +23,9 @@ const QuickSearch: React.VFC<QuickSearchProps> = (props) => {
 
   const [inputValue, setInputValue] = useState(value);
 
-  const [valueIsProvided, setValueIsProvided] = useState(true);
   const debouncedHandler = useRef<DebouncedFunc<(v: string) => void>>();
   useEffect(() => {
-    if (!valueIsProvided) {
-      onInputChange(inputValue);
-    }
-
-    debouncedHandler.current = debounce((newValue) => {
-      setValueIsProvided(true);
-      onInputChange(newValue);
-    }, 1000);
+    debouncedHandler.current = debounce(onInputChange, 1000);
 
     return () => {
       if (debouncedHandler.current) {
@@ -46,7 +38,6 @@ const QuickSearch: React.VFC<QuickSearchProps> = (props) => {
     (event, { value: newInputValue }) => {
       setInputValue(newInputValue);
       if (debouncedHandler.current) {
-        setValueIsProvided(false);
         debouncedHandler.current(newInputValue);
       }
     },
